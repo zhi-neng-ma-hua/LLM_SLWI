@@ -1,4 +1,0 @@
-2025-12-02 16:10:14 | DEBUG | paper_batch_processing:96 | 日志系统初始化完成 | name=paper_batch_processing | 控制台级别=DEBUG | 文件路径=logs\paper_batch_processing.log
-2025-12-02 16:10:14 | INFO  | paper_batch_processing:293 | [阶段 2] 启动 Excel → LLM 批量智能分析任务…
-2025-12-02 17:53:52 | INFO  | paper_batch_processing:297 | [阶段 2 完成] LLM 批量分析已结束 | 累计耗时 6218.61 秒
-2025-12-02 17:53:52 | INFO  | paper_batch_processing:304 | [主流程完成] 全部批处理与分析任务执行完毕。
