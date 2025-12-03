@@ -1,0 +1,208 @@
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:96 | 日志系统初始化完成 | name=double_blind_batch_merger | 控制台级别=DEBUG | 文件路径=logs\double_blind_batch_merger.log
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:203 | [启动] 轮次 R1 双盲批次结果合并任务，目录=F:\Scientific-Research\LLM-SLWI\data\systematic_review\double_blind\R1
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:96 | [扫描结果] 轮次 R1 在 F:\Scientific-Research\LLM-SLWI\data\systematic_review\double_blind\R1 下发现 49 个批次文件。
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_001.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_002.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_003.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_004.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_005.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_006.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_007.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_008.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_009.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_010.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_011.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_012.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_013.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_014.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_015.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_016.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_017.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_018.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_019.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_020.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_021.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_022.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_023.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_024.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_025.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_026.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_027.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_028.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_029.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_030.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_031.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_032.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_033.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_034.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_035.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_036.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_037.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_038.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_039.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_040.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_041.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_042.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_043.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_044.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_045.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_046.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_047.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_048.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R1_analysis_batch_049.csv
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_001.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_002.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_003.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_004.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_005.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_006.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_007.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_008.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_009.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_010.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_011.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_012.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_013.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_014.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_015.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_016.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_017.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_018.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_019.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_020.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_021.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_022.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_023.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_024.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_025.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_026.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_027.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_028.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_029.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_030.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_031.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_032.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_033.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_034.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_035.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_036.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_037.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_038.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_039.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_040.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_041.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_042.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_043.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_044.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_045.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_046.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_047.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_048.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R1_analysis_batch_049.csv 行数=19
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:171 | [合并统计] 轮次 R1 合并前总行数=979，合并后总行数=979
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:180 | [编号生成] 轮次 R1 已新增 No. 列，范围 1~979
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:188 | [合并完成] 轮次 R1 已写入：F:\Scientific-Research\LLM-SLWI\data\systematic_review\double_blind\R1\R1_analysis_results.csv | 总条目数：979
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:203 | [启动] 轮次 R2 双盲批次结果合并任务，目录=F:\Scientific-Research\LLM-SLWI\data\systematic_review\double_blind\R2
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:96 | [扫描结果] 轮次 R2 在 F:\Scientific-Research\LLM-SLWI\data\systematic_review\double_blind\R2 下发现 49 个批次文件。
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_001.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_002.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_003.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_004.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_005.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_006.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_007.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_008.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_009.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_010.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_011.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_012.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_013.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_014.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_015.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_016.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_017.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_018.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_019.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_020.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_021.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_022.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_023.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_024.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_025.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_026.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_027.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_028.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_029.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_030.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_031.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_032.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_033.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_034.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_035.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_036.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_037.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_038.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_039.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_040.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_041.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_042.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_043.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_044.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_045.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_046.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_047.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_048.csv
+2025-12-02 17:59:30 | DEBUG | double_blind_batch_merger:100 |   - R2_analysis_batch_049.csv
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_001.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_002.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_003.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_004.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_005.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_006.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_007.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_008.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_009.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_010.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_011.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_012.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_013.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_014.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_015.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_016.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_017.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_018.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_019.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_020.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_021.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_022.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_023.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_024.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_025.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_026.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_027.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_028.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_029.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_030.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_031.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_032.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_033.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_034.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_035.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_036.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_037.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_038.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_039.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_040.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_041.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_042.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_043.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_044.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_045.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_046.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_047.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_048.csv 行数=20
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:159 | [批次读取] R2_analysis_batch_049.csv 行数=19
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:171 | [合并统计] 轮次 R2 合并前总行数=979，合并后总行数=979
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:180 | [编号生成] 轮次 R2 已新增 No. 列，范围 1~979
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:188 | [合并完成] 轮次 R2 已写入：F:\Scientific-Research\LLM-SLWI\data\systematic_review\double_blind\R2\R2_analysis_results.csv | 总条目数：979
+2025-12-02 17:59:30 | INFO  | double_blind_batch_merger:247 | [主流程完成] 双盲批次结果合并任务已完成。
