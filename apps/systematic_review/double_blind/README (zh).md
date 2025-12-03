@@ -8,7 +8,10 @@
 
 ## 初筛阶段（Title / Abstract 双盲筛选）
 
-在 **初筛阶段（题目 / 摘要双盲筛选）**，当前已实现的 4 个 Python 脚本负责对筛选结果进行统一整理与统计，包括批次合并、一致性检查、决策分布汇总，以及三轮裁决后的最终纳入 / 排除统计：
+在 **初筛阶段（题目 / 摘要双盲筛选）**，当前已实现的 4 个 Python 脚本负责对筛选结果进行统一整理与统计，包括批次合并、一致性检查、决策分布汇总，以及三轮裁决后的最终纳入 / 排除统计。  
+
+初筛阶段对应的文献 PDF 文件统一存放于：  
+`data/systematic_review/double_blind/stage1_title_abstract/pdfs/`
 
 - **`merge_double_blind_batches.py`**  
   将 R1、R2 的双盲筛选批次 CSV 文件合并为单一结果文件，并对 `Notes` 列进行 JSON 格式标准化，同时重新生成全局统一的 `No.` 编号。
@@ -27,4 +30,8 @@
 ## 二筛阶段（Full-text 双盲筛选）
 
 **二筛阶段（Full-text 双盲筛选）** 的处理脚本尚未在本说明中列出。  
+
+二筛阶段对应的文献 PDF 文件计划统一存放于：  
+`data/systematic_review/double_blind/stage2_full_text/pdfs/`  
+
 后续如新增用于二筛阶段的 Python 工具脚本，可在本节补充相应的功能简介与使用说明，以保持与初筛阶段说明风格的一致性。
