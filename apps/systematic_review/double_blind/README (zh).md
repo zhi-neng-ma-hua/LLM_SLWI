@@ -10,10 +10,10 @@
 
 在 **初筛阶段（题目 / 摘要双盲筛选）**，当前已实现的 4 个 Python 脚本负责对筛选结果进行统一整理与统计，包括批次合并、一致性检查、决策分布汇总，以及三轮裁决后的最终纳入 / 排除统计。  
 
-初筛阶段对应的文献 PDF 文件统一存放于：  
-`data/systematic_review/double_blind/stage1_title_abstract/pdfs/`
+初筛阶段对应的文献 PDF 文件统一存放于：  `data/systematic_review/double_blind/stage1_title_abstract/pdfs/`
 
-- **`merge_double_blind_batches.py`**  
+- **`merge_double_blind_batches.py`**
+- 
   将 R1、R2 的双盲筛选批次 CSV 文件合并为单一结果文件，并对 `Notes` 列进行 JSON 格式标准化，同时重新生成全局统一的 `No.` 编号。
 
 - **`double_blind_consistency.py`**  
