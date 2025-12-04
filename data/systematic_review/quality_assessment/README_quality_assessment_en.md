@@ -1,419 +1,340 @@
-<!--
-══════════════════════════════════════════════════════
-   StrokeGuardian AI · README Top Section
-══════════════════════════════════════════════════════
--->
+# Field Mapping Guide for Quality Assessment (Stage 2 Full-text, L2 Writing with LLM Intervention)
 
-<!-- ======= Language Switch (top-right corner) ======== -->
-<p align="right" style="margin-top:0;">
-  <a href="README.zh-CN.md"
-     title="Switch to Simplified Chinese"
-     style="
-       display:inline-flex;
-       align-items:center;
-       gap:6px;
-       padding:4px 10px 4px 8px;
-       font:600 13px/1 'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-       color:#fff;
-       background:#00a9ff;
-       border-radius:6px;
-       text-decoration:none;
-       box-shadow:0 1px 2px rgba(0,0,0,.15);
-     ">
-    <img src="docs/assets/img/lang-zh.png" alt="🌐" width="32" height="32">
-    简体中文
-  </a>
-</p>
+This document explains how to use fields in `data_extraction_table.xlsx` to operationalize **10 quality standards** for studies included in the Stage 2 full-text screening.
 
-<!-- ======= Project Logo ======= -->
-<p align="center">
-  <img src="docs/assets/img/logo.png" width="96" height="96" alt="StrokeGuardian AI Logo"/>
-</p>
+For each quality standard, we provide:
 
-<!-- ======= Badge Section (responsive wrapping) ======= -->
-<div align="center" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0;">
-  <!-- Latest Stable Release -->
-  <a href="https://github.com/zhi-neng-ma-hua/StrokeGuardianAI/releases" title="Latest stable release">
-    <img alt="Latest Release"
-         src="https://img.shields.io/github/v/release/zhi-neng-ma-hua/StrokeGuardianAI?label=Release&labelColor=0084ff&color=00c7ff&style=flat-square">
-  </a>
+- **Standard** – What the criterion means  
+- **Mapped fields** – Which data extraction fields support this criterion  
+- **Purpose & usage** – How to use these fields when rating study quality
 
-  <!-- License -->
-  <a href="https://github.com/zhi-neng-ma-hua/StrokeGuardianAI/blob/main/LICENSE" title="MIT License">
-    <img alt="License: MIT"
-         src="https://img.shields.io/github/license/zhi-neng-ma-hua/StrokeGuardianAI?label=License&labelColor=0084ff&color=00c7ff&style=flat-square">
-  </a>
+This guide is designed to be used together with `quality_assessment_table.xlsx` for:
 
-  <!-- Continuous Integration Status -->
-  <a href="https://github.com/zhi-neng-ma-hua/StrokeGuardianAI/actions/workflows/ci.yml" title="CI Status">
-    <img alt="CI Status"
-         src="https://img.shields.io/github/actions/workflow/status/zhi-neng-ma-hua/StrokeGuardianAI/ci.yml?branch=main&label=CI&labelColor=0084ff&color=00c7ff&style=flat-square">
-  </a>
-
-  <!-- Maintenance Activity -->
-  <a href="https://github.com/zhi-neng-ma-hua/StrokeGuardianAI/graphs/commit-activity" title="Commit activity over the last 12 months">
-    <img alt="Maintenance"
-         src="https://img.shields.io/badge/maintenance-yes-00c7ff?labelColor=0084ff&style=flat-square">
-  </a>
-</div>
-
-<!-- ======= Main Title (gradient outline) ======= -->
-<h1 align="center" style="
-  margin:0.4em 0 0;
-  font-size:2.4em;
-  font-weight:900;
-  background:linear-gradient(90deg,#00c7ff 0%,#0084ff 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-">
-  Stroke Guardian AI
-</h1>
-
-<!-- ======= Subdivided Tagline ======= -->
-<p align="center" style="font-size:14.5px;font-style:italic;line-height:1.6;margin:4px 0 12px;">
-  ✨ AI-Powered · Compliant with Hospital-Grade Security & Regulations · Real-Time, Precise Stroke Rehabilitation Assessment Platform ✨
-  
-   <br>
-  <span style="font-weight:normal;">
-     <p align="center">
-    (Integrating multi-dimensional data acquisition with evidence-based medical strategies,
-    fully aligned with the WHO ICF framework, offering
-    <em>extensible, verifiable, and explainable</em> stroke rehabilitation assessment and intervention solutions for clinical and research needs)
-     </p>
-  </span>
-</p>
-
-<br>
-
-<!-- ======= Author Info Card ======= -->
-<p align="center">
-  <strong>Xuejin Cao</strong> &nbsp;&nbsp;|&nbsp;&nbsp; National University of Malaysia
-  <br>
-  <br>
-  📧 <a href="mailto:zhinengmahua@gmail.com">zhinengmahua@gmail.com</a> &nbsp;•&nbsp;
-  💬 WeChat&nbsp;<code>zhinengmahua</code>&nbsp;•&nbsp;
-  📱 WhatsApp&nbsp;<code>+60 123 456 789</code>
-</p>
-
-<!-- ======= Semi-Transparent Divider ======= -->
-<hr style="width:82%;max-width:780px;border:0;border-top:1px solid rgba(0,0,0,.06);margin:12px auto 24px;">
-
-<!-- ======= Introduction ======= -->
-<div style="
-  max-width:760px;
-  margin-top:1em;
-  line-height:1.8;
-  font:600 15px/1.56 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-">
-  <p>
-    <strong>StrokeGuardian AI</strong> is a stroke rehabilitation intelligence assessment platform designed for medical institutions, based on <strong><em>edge–cloud</em></strong> collaboration and a <strong><em>deep learning</em></strong> architecture.
-    It transforms patients’ daily movement behaviors into quantifiable rehabilitation metrics in real time, in accordance with international standards such as <em>WHO ICF</em> and <em>HL7 FHIR</em>.
-    By integrating multi-modal data acquisition (<code>RGB-D cameras</code> and <code>IMU</code>), and employing cutting-edge algorithms like <code>Transformer-VAE</code>, the system achieves sub-millimeter skeletal reconstruction (ICC ≥ 0.94)
-    and end-to-end inference latency of <code>&lt; 50 ms</code>, making it suitable for hospital-grade settings and extended home-based monitoring.
-    The platform outputs traceable, multi-dimensional rehabilitation reports, assisting clinical teams in devising personalized rehabilitation plans, optimizing follow-up processes, and providing a full-cycle data loop with validation support for research institutions.
-    Through <code>RAG-LLM</code> and <code>LSTM-Survival / XGB-SHAP</code> risk models, it can efficiently produce customized training suggestions and warnings for fall or recurrent stroke, boosting overall follow-up efficiency by <strong>38%</strong> (<em>p &lt; 0.001</em>),
-    while maintaining a high correlation (<em>r = 0.83</em>) with NIHSS scale results. On the whole, under the technical paradigm of international rehabilitation guidelines (<em>AHA, ESO</em>), this platform provides robust support for swift, precise,
-    and explainable stroke rehabilitation assessment and research expansion.
-  </p>
-</div>
-
-<br>
+- Guiding quality scoring and evidence documentation  
+- Training new reviewers  
+- Providing an auditable trail for quality assessment decisions
 
 ---
 
-## Abstract
+## Table of Contents
 
-This study focuses on an integrated stroke rehabilitation assessment and intervention platform named <strong>StrokeGuardian AI</strong>, which aims to precisely quantify and remotely support patients’ gait and motor functions through multi-perspective video and deep learning technology.
-
-At the edge, the platform harnesses <code>RGB-D + IMU</code> multimodal data capture, and builds high-precision 3D skeletal sequences (ICC ≥ 0.94) via <code>Spatio-Temporal Transformer-VAE</code> in combination with <code>ICP</code> / <code>Bundle Adjustment</code> techniques, while controlling end-to-end inference latency within < 50 ms.
-
-By performing real-time analysis of high-dimensional kinematic features, the system leverages <code>>Bayesian state space</code> and <code>factor graphs</code> every 16 ms to update key rehabilitation metrics aligned with the <abbr title="International Classification of Functioning, Disability and Health"><strong>ICF</strong></abbr> standard, and outputs them in <abbr title="Fast Healthcare Interoperability Resources">FHIR</abbr>-compliant format through a <code>gRPC-TLS</code> secure tunnel—meeting WHO, HL7, and other international norms for cross-platform data interoperability.<br><br>
-
-In practice, the platform integrates <code>GPT-4 Turbo</code> (RAG + Prompt Ensembling) with EMR, clinical guidelines (AHA / ESO), and patient preferences to dynamically generate personalized rehabilitation training and predictive risk scores; meanwhile, <code>LSTM-Survival</code> and <code>XGB-SHAP</code> modules provide out-of-threshold alerts for falls and recurrent stroke events.
-
-Tested on a multicenter prospective cohort (N=312), results show a significant correlation (r = 0.83) between the system’s outputs and NIHSS scores, and a 38% reduction (p < 0.001) in follow-up duration compared to traditional methods.
-
-In conclusion, StrokeGuardian AI demonstrates real-time, precise, and explainable stroke rehabilitation assessment across diverse contexts. Leveraging CNCF containerization standards, it also supports large-scale deployment for international remote rehabilitation and personalized interventions, offering high-value technological and evidence-based backing.
-
-<br>
-
-<div style="margin-top:1em;">
-  <strong>Keywords</strong><br><br>
-  <ul style="
-    margin-left: 1.2em;
-    line-height:1.7;
-    font-weight:500;
-  ">
-    <li><em>Stroke Rehabilitation</em> — Multi-scenario rehabilitation strategies and clinical practice aligned with WHO, AHA, and ESO standards</li>
-    <br>
-    <li><em>Multiview Sensing & Integration</em> — Coordinating RGB-D cameras and IMUs to achieve sub-millimeter skeletal reconstruction</li>
-    <br>
-    <li><em>Transformer-VAE</em> — Merging variational autoencoders with spatiotemporal attention mechanisms to enhance multi-frame skeletal reconstruction accuracy and interpretability</li>
-    <br>
-    <li><em>Retrieval-Augmented Language Model (RAG-LLM)</em> — Elevating the quality of personalized interventions and risk predictions, enabling rapid, evidence-based rehabilitation decisions</li>
-    <br>
-    <li><em>Follow-up Efficiency</em> — Utilizing DevOps (CNCF, GitHub Actions) and automated reporting to reduce follow-up cycles by 38%</li>
-    <br>
-    <li><em>Explainable AI</em> — Incorporating SHAP, Grad-CAM, and similar methods to visualize and interpret stroke kinematic data and risk assessment processes</li>
-  </ul>
-</div>
-
-<br>
+1. [Clarity of Research Aims & Theoretical/Practical Novelty](#1-clarity-of-research-aims--theoreticalpractical-novelty)  
+2. [Participant Information & Key Background Variables](#2-participant-information--key-background-variables)  
+3. [Sampling Method, Sample Size, Power, and Representativeness](#3-sampling-method-sample-size-power-and-representativeness)  
+4. [Group Assignment and Potential Bias](#4-group-assignment-and-potential-bias)  
+5. [Temporal Design: Short- and Long-term Effects](#5-temporal-design-short--and-long-term-effects)  
+6. [Instrument Reliability, Validity, and L2 Applicability](#6-instrument-reliability-validity-and-l2-applicability)  
+7. [Intervention Procedures, Duration, and Replicability](#7-intervention-procedures-duration-and-replicability)  
+8. [Alignment Between Statistical Methods and IV/DV](#8-alignment-between-statistical-methods-and-ivdv)  
+9. [Statistical Assumptions, Tests, and Effect Sizes](#9-statistical-assumptions-tests-and-effect-sizes)  
+10. [Outlier Handling, Result Interpretation, and Theoretical Integration](#10-outlier-handling-result-interpretation-and-theoretical-integration)  
 
 ---
 
-<br>
+## Global Overview: Quality Standards and Field Mapping
 
-## 1. Introduction
+A quick reference to see which extracted fields support each quality standard.
 
-Stroke (cerebrovascular accident) is a major cause of high disability rates and premature mortality worldwide, posing severe challenges to healthcare systems and public health resources. When a stroke occurs, the central nervous system often sustains irreversible damage, particularly affecting lower-limb gait, balance control, and activities of daily living. Accurate, real-time rehabilitation assessments targeting these functional impairments are vital to promoting motor recovery, reducing recurrence risk, and improving overall quality of life.<br><br>
-
-Traditional stroke rehabilitation assessments typically rely on single-environment (e.g., lab-based) or manual observation methods, questionnaires, and simplified scales. These approaches often fail to reflect patients’ actual movement behaviors and functional states across diverse real-world settings (home, outdoors, community). Although high-precision gait analyzers or motion-capture systems do exist, their deployment can be costly and complex, lacking the scalability or remote capabilities needed for large-scale application. Against this backdrop, leveraging multi-sensor fusion and deep learning algorithms to provide interpretable and sustainable remote stroke rehabilitation evaluations has become a common concern for both industry and academia.<br><br>
-
-Focusing on the **StrokeGuardian AI** platform, this study leverages an <code>edge–cloud</code> approach that integrates <code>RGB-D cameras</code> and <code>IMUs</code> to reconstruct patients’ skeletal motion at high precision and in real time.
-
-Combining <code>Transformer-VAE</code> (which strengthens spatiotemporal consistency and interpretability) with <code>Retrieval-Augmented LLM</code> (for personalized interventions and automated decisions), the system outputs multidimensional rehabilitation metrics aligned with the global health classification framework promoted by the WHO (<abbr title="International Classification of Functioning, Disability and Health"><code>ICF</code></abbr>) and HL7 (<abbr title="Fast Healthcare Interoperability Resources"><code>FHIR</code></abbr>) standards. Beyond fine-grained rehabilitation assessments, the platform deploys LSTM-Survival, XGB-SHAP, and similar models to preemptively warn of fall and recurrent stroke risks, while ensuring compliance and traceability.<br><br>
-
-Notably, in a multicenter prospective study (N=312), the platform demonstrated a high correlation (r=0.83) with NIHSS (<em>National Institutes of Health Stroke Scale</em>) scores and achieved a 38% reduction in clinical follow-up times compared to conventional workflows. These findings align with guidelines from the AHA (American Heart Association) and ESO (European Stroke Organisation), highlighting the importance of “early intervention and dynamic monitoring” in stroke rehabilitation.
-
-Meanwhile, by leveraging CNCF container standards and GitHub Actions, the platform achieves agile DevOps processes and cross-regional scalability, providing robust technical foundations and evidence-based support for remote rehabilitation and multicenter international trials.<br><br>
-
-In summary, this research provides a detailed exposition of StrokeGuardian AI’s system architecture, key algorithms, and empirical results—covering multiview data capture and spatiotemporal fusion mechanisms, the role of Transformer-VAE in skeletal reconstruction and interpretability, and the LLM-assisted approach to personalized rehab interventions and risk predictions. The objective is to establish a new paradigm of low-cost, multi-setting stroke rehabilitation assessment that meets clinical demands for real-time accuracy and regulatory compliance, while also supporting large-scale research and smart healthcare ecosystems.
-
-<br>
+| #  | Quality standard (summary)                                      | Key mapped fields (examples)                                                                                                      |
+|----|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Clarity of aims & theoretical/practical novelty                  | Basic Identification.research_aims / research_gap_or_novelty; Methodology.theoretical_foundation                                 |
+| 2  | Participant information & language background                    | Participant Information.educational_level / language_proficiency / mother_tongue / learning_context / target_language / discipline / sex / age |
+| 3  | Sampling method, sample size, power, representativeness          | Methodology.sampling_method / sample_size_and_effect / power_analysis / sampling_frame_and_representativeness                    |
+| 4  | Group assignment and potential bias                              | Methodology.group_assignment_method; Study Quality and Reporting.risk_of_bias_randomization / baseline_equivalence               |
+| 5  | Temporal design and short-/long-term effects                     | Methodology.research_design; Intervention.duration; Outcome.assessment_timepoints / followup_length_and_type                     |
+| 6  | Instrument reliability/validity & rater training                 | Methodology.data_collection_instrument / data_collection_validity_reliability / scoring_procedure_and_rater_training            |
+| 7  | Intervention procedures, duration, and replicability             | Intervention.duration / intervention_implementation / writing_stage / setting / llm_* fields                                     |
+| 8  | Alignment between statistical methods and IV/DV                  | Methodology.data_analysis_method; Outcome.primary_outcome_variables / independent_variables_and_factors; Methodology.unit_of_analysis |
+| 9  | Statistical assumptions, tests, and effect sizes                 | Outcome.statistical_significance / effect_size_summary; Study Quality and Reporting.assumption_check_and_data_diagnostics / data_preprocessing_and_transformation |
+| 10 | Outlier handling, result interpretation, and theoretical integration | Study Quality and Reporting.outlier_treatment_and_sensitivity_analysis; Outcome.limitation / challenge / implication; Methodology.theoretical_foundation |
 
 ---
 
-<br>
+## Field Naming Notes
 
-## 2. Methods
+- `Basic Identification.research_aims` means the `research_aims` field under the **Basic Identification** module.  
+- `Methodology.research_design` means the `research_design` field under the **Methodology** module.
 
-### 2.1 Overall System Architecture
+In `data_extraction_table.xlsx`, we recommend using flattened column names such as:
 
-To achieve multi-dimensional, high-precision monitoring of the stroke rehabilitation process, StrokeGuardian AI adopts a three-tier <strong>edge–cloud–client</strong> collaborative architecture:
+- `BasicIdentification_research_aims`  
+- `Methodology_research_design`  
 
-1. **Edge**
-
-   Deployed at the patient’s location (e.g., ward or home), multiple RGB-D cameras and IMUs collect initial data and carry out preliminary preprocessing.
-   
-3. **Cloud**
-   
-   High-performance cloud servers provide storage and computing power for tasks such as Transformer-VAE skeletal reconstruction and RAG-LLM inference with heavy workloads.
-
-5. **Client (Local)**
-   
-   Delivers real-time interfaces for clinicians, rehabilitation therapists, or researchers. Via secure (gRPC-TLS) channels, they receive key rehabilitation metrics and personalized risk assessment reports from the platform.
-
-This layered design meets global standards for remote healthcare security and data privacy (e.g., GDPR, HIPAA, PIPL), while integrating CNCF containerized microservices to support flexible deployment in multicenter randomized controlled trials (RCTs) or other cross-regional collaborations.
-
-### 2.2 Multiview Data Capture and Pose Estimation
-
-At the <strong>edge</strong>, the system integrates up to seven RGB-D cameras and a BNO080 IMU (inertial measurement unit), creating a dense visual cone for panoramic capture of patients’ movements. Through <strong>monocular–binocular hybrid pose estimation</strong> and <strong>ICP (Iterative Closest Point)/Bundle Adjustment</strong> methods, the platform can splice multiview data into sub-millimeter 3D point clouds and skeletal sequences. This multi-sensor fusion maintains high robustness and precision, even in challenging conditions such as occlusion, turning, or poor lighting.
-
-Detailed steps:
-
-1. **Data Synchronization**
-  
-   Align multiple cameras and IMU data accurately using timestamps and network time protocols (NTP or PTP).
-
-4. **2D Keypoint Detection**
-  
-   Use YOLO-v8 Pose, MediaPipe, or similar algorithms to identify joint positions in each video frame.
-
-7. **Multiview Fusion**
-  
-   Employ Pose-Lifter and multiview geometry to raise 2D keypoints into 3D coordinates, followed by ICP/BA for global consistency optimization.
-
-10. **IMU Collaboration**
-   
-    Incorporate EKF/UKF filters to fuse IMU data for skeletal reconstruction and motion estimation, enhancing adaptability to fast movements and occlusion scenarios.
-
-#### 2.3 Spatiotemporal Optimization and Explainability
-
-To ensure accuracy in skeletal reconstruction and motion analysis, while retaining interpretability and physical consistency, StrokeGuardian AI incorporates the following core modules:
-
-- **Spatio-Temporal Transformer-VAE**
-
-  Merging Transformer-based global attention with a Variational Autoencoder (VAE) to integrate multiframe, cross-temporal, and spatial information. This approach deepens the understanding of joint sequence patterns in skeletal reconstruction, suppressing noise and outliers through a variational latent space.
-
-- **Physical Constraints and Grad-CAM/SHAP Visualization**
-
-  Enforcing kinematic and dynamic constraints so that outputs remain close to real-world physical motion. Meanwhile, combining Grad-CAM or SHAP analysis highlights the importance of specific frames or joints, offering interpretable diagnostic insights for clinical experts.
-
-### 2.4 High-Dimensional Rehabilitation Metric Extraction and FHIR Mapping
-
-Every 16 ms, **StrokeGuardian AI** generates an updated stream of high-dimensional rehabilitation metrics—such as gait symmetry, power spectral entropy, and coordination coupling indices—closely related to stroke rehabilitation biomarkers. The process follows these steps:
-
-1. **Kinematic Inference**
-  
-   Calculate joint angles, stride length, stance phases, and other parameters from the extracted skeletal sequences.
-
-4. **Bayesian State Space + Factor Graphs**
-  
-   Dynamically track multi-timestep motion features and quantify uncertainties, capturing both long-term trends and instantaneous changes.
-
-7. **ICF Alignment**
-  
-   Map these metrics to WHO ICF standards, enabling clinicians and researchers to assess patient functionality within an internationally recognized framework.
-
-10. **FHIR Resource Mapping**
-   
-    Securely package metrics as HL7 FHIR resources via gRPC-TLS encryption, ensuring interoperability with Hospital Information Systems (HIS), research databases, or other clinical applications.
-
-### 2.5 Retrieval-Augmented Language Model (RAG-LLM) and Risk Alerts
-
-To enable personalized rehabilitation interventions and early risk warnings, the platform embeds a **Retrieval-Augmented Language Model (RAG-LLM)** and a suite of risk-control models:
-
-- **GPT-4 Turbo (RAG + Prompt Ensembling)**
-  
-  Integrates EMR, clinical guidelines (AHA, ESO), and individual patient data in real time to generate personalized training regimens, medication adjustments, and other natural-language reports.
-
-- **LSTM-Survival & XGB-SHAP**
-
-  Build on time-series analysis and feature-importance visualization, providing threshold-based alerts for falls and recurrent stroke risk. Once metrics surpass certain limits, the system immediately notifies clinicians or family members for timely intervention or re-evaluation.
-
-This multi-model collaboration effectively reduces clinical workloads in evaluation and planning, improving both the precision and responsiveness of rehabilitation strategies, and paving the way for scalable remote intervention at large.
-
-### 2.6 Study Design and Experimental Cohort
-
-This research employed a multicenter prospective design, enrolling 312 stroke patients whose initial NIHSS scores ranged between 4 and 20, then randomly assigning them to a baseline group or control group:
-
-1. **Data Collection and Labeling**
-
-   At the edge site, participants performed natural walking (3–10 minutes) and standardized tests (e.g., 10-meter walk test). The control group used traditional manual observation and scale assessments, while the baseline group simultaneously utilized the **StrokeGuardian AI** platform.
-
-3. **Comparison of Scales and System Outputs**
-
-   Evaluate correlations between metrics derived from NIHSS, BI (Barthel Index), FMA (Fugl-Meyer Assessment), etc., and the system’s outputs—such as gait symmetry, joint angles, and follow-up times.
-
-5. **Follow-up Efficiency and User Satisfaction**
-
-   Analyze differences in follow-up duration, operational convenience, clinical adherence, and patient satisfaction under traditional vs. AI-enhanced assessments.
-
-7. **Risk Alert Validation**
-
-   For subgroups experiencing falls or recurrence within 30 days, perform retrospective analyses to test the accuracy of LSTM-Survival and XGB-SHAP risk alerts.
-
-Ultimately, these multi-factor designs and longitudinal tracking will assess the platform’s generalizability and stability across different rehabilitation stages (subacute/chronic) and varied settings (hospital/home/remote).
+This makes it easier to process the table programmatically (e.g., with Python or R).
 
 ---
 
-This methodological framework spans system architecture, data acquisition, metric computation, and clinical comparisons, comprehensively addressing the key elements of stroke rehabilitation assessment. Its extensive alignment with HL7 FHIR, WHO ICF, and DevOps standards ensures secure, compliant operation in hospital-grade environments and solid underpinnings for multicenter scalability.
+## 1. Clarity of Research Aims & Theoretical/Practical Novelty
 
-<br>
+**Standard**
 
----
+The study clearly states its research aims and questions and situates them within a theoretical and/or practical context, highlighting novelty or a clear knowledge gap.
 
-<br>
+**Mapped fields**
 
-## 3. Results
+- `Basic Identification.research_aims`  
+- `Basic Identification.research_gap_or_novelty`  
+- `Methodology.theoretical_foundation`
 
-### 3.1 Cohort Characteristics and Scale Comparison
+**Purpose & usage**
 
-This prospective multicenter cohort involved 312 stroke patients, with approximately 72.1% suffering ischemic stroke and 27.9% hemorrhagic stroke. The average age was 64.3 ± 8.2 years, closely aligning with WHO and various national epidemiological data on stroke populations. To minimize confounding from acute-phase or severe impairments, NIHSS scores of 4–20 were prioritized, and further stratified sampling was conducted to enhance representativeness and generalizability.<br><br>
+- `research_aims`: Captures whether the research aims/questions are **clearly and specifically articulated**, rather than vague or generic.  
+- `research_gap_or_novelty`: Captures the **claimed knowledge gap or innovation**, e.g., what is new compared to traditional feedback or prior LLM studies.  
+- `theoretical_foundation`: Indicates whether the study is grounded in a **coherent theoretical framework** (e.g., sociocultural theory, process writing theory), instead of being theory-free.
 
-Across multiple measurements and cross-validations with manual labels, the core motion metrics produced by StrokeGuardian AI (e.g., gait symmetry, joint mobility, balance control indices) exhibited a significant correlation (r=0.83, p<0.001) with NIHSS scores. Compared to single-scale methods, the system offered more granular quantification of patients’ real-world gait deviations, delivering more comprehensive insights to clinical teams. For a random sample of 50 cases, an ICC (Intra-class Correlation Coefficient) analysis on joint angles showed ICC ≥ 0.94, indicating high reliability and minimal measurement bias. These findings are consistent or superior to previous literature on digitized stroke rehabilitation systems.
-
-### 3.2 Follow-up Efficiency and Clinical Operational Metrics
-
-Compared to conventional methods relying on manual observation or single-timepoint questionnaires, StrokeGuardian AI significantly reduced the time required for clinical follow-ups (averaging -38%, p<0.001) while enhancing assessment quality and patient adherence. After skeletal reconstruction and metric extraction at the edge, the system automatically pushes FHIR resources to Hospital Information Systems (HIS) or research databases via secure gRPC-TLS, enabling healthcare personnel to access individualized rehabilitation reports or share dynamic patient data across departments in mere seconds—aligned with AHA and ESO international guidelines advocating for remote and interdisciplinary cooperation.<br><br>
-
-From a DevOps and compliance perspective, this study found that, by employing Helm Charts and GitHub Actions in a containerized deployment environment, the system offers rapid iteration and multi-environment switching capabilities, with version canary/gray updates taking less than five minutes. This feature is crucial in remote rehabilitation scenarios, allowing medical teams to deploy new algorithms or additional assessment modules on the fly, while retaining audit trails to meet the requirements of multinational RCTs and large hospital compliance standards.
-
-### 3.3 Personalized AI Interventions and Risk Alerts
-
-The built-in RAG-LLM (GPT-4 Turbo + Prompt Ensembling) automatically generates evidence-based rehabilitation prescriptions and tailored training recommendations after synthesizing electronic medical records (EMRs), clinical practice guidelines (AHA/ESO), and patient preferences. It provides guidance on nutrition, exercise pacing, and medication reminders for subacute or chronic-phase patients. In a blinded comparison across different patient groups, results indicated that the AI-derived prescriptions surpassed conventional manual approaches in both time efficiency and personalization (p<0.01).<br><br>
-
-Additionally, the platform’s LSTM-Survival and XGB-SHAP models achieved high sensitivity (0.82) and specificity (0.79) in predicting falls and secondary stroke risk, comparable to or better than advanced monitoring algorithms reported in global literature. When key indicators (e.g., instability index, coordination coupling index) exceed thresholds, the system dispatches real-time alerts to clinicians or family members for prompt intervention or re-evaluation. SHAP-based visual explanations precisely reveal main contributing factors in model decisions, such as step-width variability or lower-limb strength asymmetry, aiding medical professionals in formulating more targeted rehabilitation plans.
-
-<br>
+> If these fields are well populated and coherent, you can justify a high rating for Quality Standard 1.
 
 ---
 
-<br>
+## 2. Participant Information & Key Background Variables
 
-In sum, all these findings underscore the practical value of StrokeGuardian AI in stroke rehabilitation assessment and risk alerting:
+**Standard**
 
-1. **Efficient Metrics**: The kinematic features correlate well with clinical scales.
-  
-3. **Significant Time Savings in Assessment/Follow-up**: Combining remote deployment with automated report generation.
+Participant characteristics and language-related background variables are reported in sufficient detail.
 
-5. **Personalized Interventions**: RAG-LLM and risk alert modules substantially improve customization and responsiveness of rehabilitation strategies.
+**Mapped fields**
 
-7. **Viable for Multicenter Rollout**: Thanks to containerized microservices and standardized data interoperability (FHIR), the system exhibits strong feasibility in compliance, scalability, and other dimensions.
+- `Participant Information.educational_level`  
+- `Participant Information.language_proficiency`  
+- `Participant Information.mother_tongue`  
+- `Participant Information.learning_context`  
+- `Participant Information.target_language`  
+- `Participant Information.discipline`  
+- `Participant Information.sex`  
+- `Participant Information.age`
 
-These outcomes align with StrokeGuardian AI’s core design goals and contribute robust evidence for large-scale remote rehabilitation and precision medicine in the stroke domain. Future expansions to multilingual and multi-cultural contexts could further extend this system’s potential to broader populations and health management scenarios [5].
+**Purpose & usage**
 
-<br>
+These fields should allow you to reconstruct:
 
----
+- **Who** the learners are (age, sex, educational level)  
+- **Which L2** they are learning (here, primarily English)  
+- **In what context** they are learning (EFL, ESL, ELL, EMI, etc.)  
+- **What discipline** they are studying (e.g., English major, engineering, education)
 
-<<br>
+Use them to assess:
 
-## 4. Discussion
+- Whether the sample is truly about **L2 English writing** with LLM mediation  
+- Whether the study provides enough background to interpret generalizability and subgroup differences
 
-Focusing on StrokeGuardian AI’s multiview data capture and deep learning integration, this study systematically validated its feasibility and accuracy for real-time assessment, personalized intervention, and risk alerts in stroke rehabilitation. The following sections discuss its clinical relevance, technical strengths, and future development directions:
-
-### 4.1 Comparison with Existing Rehabilitation Assessment Methods
-
-First, in comparisons with clinical mainstream scales such as NIHSS, BI, and FMA, StrokeGuardian AI’s outputs of gait symmetry, joint mobility, and spatiotemporal parameters achieved strong linear correlations (up to r=0.83, p<0.001). This demonstrates that the platform possesses sensitivity and accuracy on par with or better than traditional manual assessments for detecting functional changes in stroke patients. Notably, by merging RGB-D + IMU data across multiple viewpoints and employing deep spatiotemporal optimization models (e.g., VAE-Transformer), the system can provide a more granular quantification of patients’ natural walking patterns—an advantage over conventional approaches reliant on fixed lab setups or manual observation.<br><br>
-
-Such high-precision, multi-scenario evaluation is crucial for meeting WHO, AHA, and other international bodies’ calls for continuous, real-world rehabilitation assessment. Clinicians can directly obtain individualized functional metrics in outpatient clinics, hospital wards, or even the patient’s home environment and reference ICF standards for comprehensive evaluations.
-
-### 4.2 Value of Explainable Deep Learning and Automated Intervention
-
-Technically, StrokeGuardian AI combines a Spatio-Temporal Transformer-VAE with models like LSTM-Survival and XGB-SHAP. This fusion not only maintains spatiotemporal integrity and high robustness in skeletal reconstruction but also facilitates advanced risk forecasting for falls and secondary strokes. Its explainability components (e.g., SHAP visualizing key feature contributions) offer direct insights into “how the model makes decisions,” allowing clinical staff to trust and carefully adopt the system’s outputs.<br><br>
-
-Meanwhile, the built-in RAG-LLM (e.g., GPT-4 Turbo) merges EMR data with clinical guidelines (AHA / ESO) in real time to generate rehabilitation strategies on a per-patient basis, drastically reducing the burden of repetitive or trivial decision-making for medical personnel. This also provides robust data and knowledge support for “personalized precision interventions” in remote rehabilitation contexts. Coupled with cloud-based containerization and continuous deployment (CNCF standards), the platform can dynamically update algorithms or model parameters, meeting the complex demands of new patient populations or multicenter collaborations.
-
-### 4.3 Platform Limitations and Future Outlook
-
-Despite the platform’s proven high correlation and efficiency compared to various scales, several limitations remain:
-
-1. **Sample Composition and Generalizability**
-
-   Most of the current study was conducted within a single region or under relatively uniform rehabilitation conditions. Future large-scale RCTs across multiple languages and cultures are needed to test platform robustness in different populations (e.g., Asia, Africa) and healthcare resource settings.
-
-3. **Cost of Multicamera Deployment**
-
-   While deploying seven RGB-D cameras and IMUs may be feasible for well-funded centers or research institutions, resource-constrained or home environments might benefit from a “hybrid approach” combining monocular/binocular cameras with wearable sensors, balancing accuracy and cost-effectiveness.
-
-5. **Adherence to Personalized Interventions**
-
-   Although the RAG-LLM greatly reduces medical workload, long-term patient or caregiver adherence to AI-generated prescriptions still requires investigation, with further efforts needed around digital health education and data privacy.
-
-Nevertheless, given the successful implementation of cloud microservices and DevOps processes (Helm Charts, GitHub Actions), future international multicenter collaborations could rapidly iterate and conduct “blue-green deployments” of StrokeGuardian AI. Different regions and hospitals could swiftly spin up the same container image while sharing core data structures (FHIR resources), thus achieving cross-border interoperability under WHO-endorsed global standards.<br><br>
-
-Overall, StrokeGuardian AI employs an “edge–cloud–client” multimodal framework with explainable deep learning at its core. Enhanced by RAG-LLM’s automated decision support and LSTM-Survival risk modeling, it shows promising feasibility for scalable stroke rehabilitation assessment and remote intervention. With larger RCTs, extended multi-language coverage, and home-based sensor solutions, the platform may become a crucial pillar of International Precision Rehabilitation 4.0, delivering personalized, evidence-based rehabilitation support to stroke patients at various stages and diverse contexts.
-
-<br>
+> If these fields are complete and consistent, the study meets Quality Standard 2.
 
 ---
 
-<br>
+## 3. Sampling Method, Sample Size, Power, and Representativeness
 
-## 5. Conclusion
+**Standard**
 
-Synthesizing the empirical results and algorithmic validations from this multicenter cohort, StrokeGuardian AI has demonstrated the following key values and far-reaching implications in stroke rehabilitation assessment:
+Sampling procedures, sample size, and power analysis are reported clearly, and sample representativeness is discussed.
 
-1. **Multidimensional Data Fusion and Precise Quantification**
-   
-   By employing multiview RGB-D cameras and IMU sensors, the platform captures patients’ natural walking and movement patterns in varied clinical and home environments. Leveraging deep learning models like Transformer-VAE, it achieves sub-millimeter accuracy and a high-frequency (16 ms) output rate. Correlation tests with NIHSS (r = 0.83) confirm that the platform can produce quantitative indicators comparable to, or more refined than, those from traditional evaluations.
+**Mapped fields**
 
-3. **Real-Time Operation and Remote Adaptation**
-   
-   Through its “edge–cloud–client” framework, the platform attains end-to-end inference latencies under 50 ms, addressing the needs of real-time remote rehabilitation monitoring. This substantially reduces constraints of time and place in large-scale outpatient, home-based, or multicenter follow-ups—echoing AHA and ESO guidelines on sustained, dynamic stroke rehabilitation management.
+- `Methodology.sampling_method`  
+- `Methodology.sample_size_and_effect`  
+- `Methodology.power_analysis`  
+- `Methodology.sampling_frame_and_representativeness`
 
-5. **Personalized Interventions and Explainable Risk Alerts**
-   
-   Integrating a Retrieval-Augmented LLM (RAG-LLM) with LSTM-Survival and XGB-SHAP risk models, StrokeGuardian AI not only provides individualized rehabilitation advice but also reveals critical risk factors through explainable visualization (SHAP). When monitored metrics exceed thresholds, instant alerts are sent to enhance clinical and household coordination, aligning with WHO’s emphasis on “early intervention” and “intelligent monitoring.”
+**Purpose & usage**
 
-7. **DevOps Ecosystem and International Scaling Potential**
-   
-   Armed with CNCF container standards and GitHub Actions, the platform ensures agile iteration and auditability for multilingual, multicenter RCTs and global deployment. With version grayscale updates taking under 5 minutes, it further establishes high scalability under hospital-grade security and compliance, fulfilling core HL7 FHIR requirements for data interoperability and cross-system exchange.
+- `sampling_method`: Documents how participants were recruited (convenience, random, cluster, voluntary sign-up, etc.).  
+- `sample_size_and_effect`: Records total N, group Ns, and whether **effect sizes** (e.g., Cohen’s d, η², r, OR) are reported.  
+- `power_analysis`: Indicates whether any **power analysis / sample size justification** is provided.  
+- `sampling_frame_and_representativeness`: Captures whether the study discusses how representative the sample is (e.g., one university, one class, regional bias).
 
-9. **Implications for Future Smart Rehabilitation**
-    
-   StrokeGuardian AI has achieved significant success in stroke rehabilitation assessment and sets a feasible paradigm for broader precision rehabilitation and smart healthcare. In future research, combining additional modalities (e.g., electromyography, electroencephalography) or federated learning schemes, and validating outcomes in diverse cultural populations, would likely reinforce its standing as a key component in global rehabilitation medicine and digital health ecosystems.
+> Together, these fields directly operationalize Quality Standard 3.
 
-In conclusion, by integrating multidimensional sensor data with deep learning-based risk management mechanisms, StrokeGuardian AI has effectively shortened clinical follow-up periods (-38%, p < 0.001) and shown strong consistency (r = 0.83) with major scales such as NIHSS. Its explainable, scalable, and real-time nature responds to WHO, AHA, and ESO imperatives for “digitalized, continuous, and individualized” stroke rehabilitation. With broader sample sizes, extended regional coverage, and more complex scenarios, this platform could become a pivotal pillar of Precision Rehabilitation 4.0, delivering scientifically grounded and accessible rehabilitation support and risk prevention for stroke patients worldwide.
+---
+
+## 4. Group Assignment and Potential Bias
+
+**Standard**
+
+The allocation of participants to experimental/control conditions (random or non-random) is clearly described, and potential bias is considered.
+
+**Mapped fields**
+
+- `Methodology.group_assignment_method`  
+- `Study Quality and Reporting.risk_of_bias_randomization`  
+- `Study Quality and Reporting.baseline_equivalence`
+
+**Purpose & usage**
+
+- `group_assignment_method`: Records **how groups were formed** (true randomization, quasi-experimental grouping, pre-existing classes, etc.).  
+- `risk_of_bias_randomization`: Assesses the **risk of bias in allocation and allocation concealment**.  
+- `baseline_equivalence`: Indicates whether baseline comparability (e.g., pre-test scores, key covariates) between groups is reported.
+
+> These fields collectively support evaluation of methods, bias, and baseline comparability for Quality Standard 4.
+
+---
+
+## 5. Temporal Design: Short- and Long-term Effects
+
+**Standard**
+
+The study design captures temporal change and distinguishes short-term and, where appropriate, long-term effects.
+
+**Mapped fields**
+
+- `Methodology.research_design`  
+- `Intervention.duration`  
+- `Outcome.assessment_timepoints`  
+- `Outcome.followup_length_and_type`
+
+**Purpose & usage**
+
+- `research_design`: Distinguishes cross-sectional vs. longitudinal, pre-post vs. repeated measures designs.  
+- `duration`: Describes overall intervention length and frequency (e.g., 8 weeks, 2 sessions/week).  
+- `assessment_timepoints`: Specifies when assessments took place (pre-test, immediate post-test, delayed post-test).  
+- `followup_length_and_type`: Records the follow-up interval and outcome type, supporting claims about **long-term impact**.
+
+> Use these fields to assess whether the study meaningfully addresses temporal change and meets Quality Standard 5.
+
+---
+
+## 6. Instrument Reliability, Validity, and L2 Applicability
+
+**Standard**
+
+Measurement instruments are accompanied by reliability and validity evidence, with consideration of their appropriateness for the L2 population.
+
+**Mapped fields**
+
+- `Methodology.data_collection_instrument`  
+- `Methodology.data_collection_validity_reliability`  
+- `Methodology.scoring_procedure_and_rater_training`
+
+**Purpose & usage**
+
+- `data_collection_instrument`: Lists the main measurement tools (writing tasks, scales, interviews, logs, automated tools, etc.).  
+- `data_collection_validity_reliability`: Records evidence on reliability and validity (Cronbach’s α, factor structure, test–retest, etc.), especially for L2 learners.  
+- `scoring_procedure_and_rater_training`: Captures how writing was scored, whether raters were trained, and rater agreement indices (e.g., inter-rater reliability).
+
+> Together, these fields support a robust evaluation of measurement quality under Standard 6.
+
+---
+
+## 7. Intervention Procedures, Duration, and Replicability
+
+**Standard**
+
+The intervention procedures and dosage (duration, frequency) are described with sufficient detail to allow replication.
+
+**Mapped fields**
+
+- `Intervention.duration`  
+- `Intervention.intervention_implementation`  
+- `Intervention.writing_stage`  
+- `Intervention.setting`  
+- LLM-specific fields, e.g.:  
+  - `Intervention.llm_model_type`  
+  - `Intervention.llm_model_configuration`  
+  - `Intervention.llm_integration_mode`  
+  - `Intervention.prompting_strategy`  
+  - `Intervention.training_support_llm_literacy`  
+  - `Intervention.role_llm`  
+  - `Intervention.role_instructor`  
+  - `Intervention.llm_access_policy`  
+  - `Intervention.llm_safety_guardrails`
+
+**Purpose & usage**
+
+- these fields together allow you to reconstruct:
+  - **how long** the intervention ran (weeks, sessions, minutes/session);  
+  - **what exactly happened** in the classroom or online (tasks, steps, supports);  
+  - **how LLMs were used** (by students directly, mediated by instructors, or embedded in platforms);  
+  - the **writing stage(s)** where LLMs intervened (planning, drafting, revising, feedback interpretation, etc.).
+
+> If another instructor at a different institution could reasonably reproduce the intervention using these fields, the study meets Standard 7.
+
+---
+
+## 8. Alignment Between Statistical Methods and IV/DV
+
+**Standard**
+
+The statistical methods used are appropriate for the independent and dependent variables and match the research questions and data structure.
+
+**Mapped fields**
+
+- `Methodology.data_analysis_method`  
+- `Outcome.primary_outcome_variables`  
+- `Outcome.independent_variables_and_factors`  
+- `Methodology.unit_of_analysis`
+
+**Purpose & usage**
+
+- `data_analysis_method`: Records the statistical techniques used (t-tests, ANOVA/ANCOVA, regression, MLM, SEM, content/ thematic analysis, etc.).  
+- `primary_outcome_variables`: Identifies the **main dependent variables (DVs)** (e.g., overall writing score, fluency, anxiety scale score).  
+- `independent_variables_and_factors`: Identifies the **key independent variables (IVs)/factors** (e.g., group, time, proficiency level, LLM usage frequency).  
+- `unit_of_analysis`: Clarifies whether the analysis was conducted at the learner, text, class, or school level and whether this matches the statistical model.
+
+> These fields allow you to judge whether the methods are technically and conceptually aligned with the study design (Standard 8).
+
+---
+
+## 9. Statistical Assumptions, Tests, and Effect Sizes
+
+**Standard**
+
+The study addresses statistical assumptions, reports appropriate tests, and provides effect sizes where relevant.
+
+**Mapped fields**
+
+- `Outcome.statistical_significance`  
+- `Outcome.effect_size_summary`  
+- `Study Quality and Reporting.assumption_check_and_data_diagnostics`  
+- `Study Quality and Reporting.data_preprocessing_and_transformation`
+
+**Purpose & usage**
+
+- `statistical_significance`: Summarizes main results (p-values, direction of effects).  
+- `effect_size_summary`: Records whether effect sizes (e.g., Cohen’s d, η², r) are reported and how large they are (small/medium/large).  
+- `assumption_check_and_data_diagnostics`: Indicates whether assumptions (normality, homogeneity, sphericity, etc.) were checked and reported.  
+- `data_preprocessing_and_transformation`: Captures any data preprocessing (e.g., log transformations, aggregation) that could affect statistical assumptions.
+
+> The combination of these fields supports a high-level, journal-grade evaluation of Standard 9.
+
+---
+
+## 10. Outlier Handling, Result Interpretation, and Theoretical Integration
+
+**Standard**
+
+Outliers and extreme values are handled transparently, their impact on findings is considered, and results are interpreted in light of the theoretical framework.
+
+**Mapped fields**
+
+- `Study Quality and Reporting.outlier_treatment_and_sensitivity_analysis`  
+- `Outcome.limitation`  
+- `Outcome.challenge`  
+- `Outcome.implication`  
+- `Methodology.theoretical_foundation` (for checking whether interpretations link back to theory)
+
+**Purpose & usage**
+
+- `outlier_treatment_and_sensitivity_analysis`: Documents how outliers/extreme values were handled and whether any robustness/sensitivity analyses were conducted.  
+- `limitation`: Captures the study’s self-acknowledged limitations (design, sample, measures, duration, LLM version, etc.).  
+- `challenge`: Captures practical challenges and risks encountered during implementation (e.g., technical stability, student over-reliance, ethical concerns).  
+- `implication`: Records theoretical and pedagogical implications proposed by the authors.  
+- `theoretical_foundation`: Used here to verify whether interpretations meaningfully **connect back to theory** instead of staying purely descriptive.
+
+> Use these fields to judge whether the study treats data responsibly and interprets results in a theoretically informed way, as required by Standard 10.
+
+---
+
+## Practical Tips for Using This Mapping with `quality_assessment_table.xlsx`
+
+1. **One quality standard → at least two columns in the QA table**
+   - e.g. `Q1_clarity_novelty_rating` (e.g., 0/1/2 or Low/Medium/High)  
+   - and `Q1_clarity_novelty_evidence` (brief notes referencing the relevant fields and, optionally, page numbers).
+
+2. **Recommended workflow**
+   - Read the full text with `data_extraction_table.xlsx` and this mapping at hand.  
+   - For each quality standard (1–10), check the **Mapped fields** and fill in both rating and evidence in `quality_assessment_table.xlsx`.  
+   - If you find that a decision cannot be supported by existing fields, note this in the evidence/comment cell for that standard.
+
+3. **Team use**
+   - This mapping can be used to train new reviewers to ensure **consistent interpretation** of the quality standards.  
+   - It also allows external collaborators or reviewers to trace each quality rating back to specific, structured data fields.
+
+---
