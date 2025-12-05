@@ -2,19 +2,24 @@
 """
 exceptions.py
 
-自定义异常体系模块（项目全局通用）
+Custom exception hierarchy module (project-wide).
 
-本模块定义了项目所有自定义异常的统一基类和常用派生异常，适用于批量数据处理、PDF 解析、
-参数校验等业务场景。统一的异常体系便于全局捕获、日志管理、团队协作、自动化运维和问题溯源。
+This module defines a unified base class and common derived exceptions
+used across the project, suitable for batch data processing, PDF parsing,
+parameter validation, and other business scenarios. A consistent exception
+hierarchy facilitates centralized error handling, logging, team collaboration,
+automated operations, and issue tracing.
 
-主要异常类：
-    - BaseAppException      ：项目根异常，所有自定义异常应继承自此类
-    - PdfExtractError       ：PDF 文本解析与抽取业务异常
-    - DataValidationError   ：参数与数据前置校验异常
-    - BatchProcessingError  ：批量流程顶级业务异常
+Main exception classes:
+    - BaseAppException      : Root exception for the project; all custom
+                              exceptions should inherit from this class.
+    - PdfExtractError       : Business exception for PDF text parsing
+                              and extraction.
+    - DataValidationError   : Exception for parameter and data pre-validation.
+    - BatchProcessingError  : Top-level business exception for batch workflows.
 
-作者：智能麻花 <zhinengmahua@gmail.com>
-日期：2025-05-22
+Author: Aiden Cao <zhinengmahua@gmail.com>
+Date: 2025-05-22
 """
 
 from typing import Optional
@@ -22,18 +27,20 @@ from typing import Optional
 
 class BaseAppException(Exception):
     """
-    项目自定义异常的统一基类。
+    Unified base class for all custom application exceptions.
 
-    用于构建统一的异常继承体系，实现全局异常捕获与链式溯源。
-    推荐所有自定义异常均继承此类，以支持日志归档、团队协作和运维监控。
+    This class provides a common inheritance root to enable global exception
+    handling and chained error tracing. All custom exceptions are recommended
+    to inherit from this class to support consistent logging, collaboration,
+    and operations monitoring.
     """
 
     def __init__(self, message: str, cause: Optional[Exception] = None):
         """
-        初始化 BaseAppException。
+        Initialize BaseAppException.
 
-        :param message: 错误描述信息（建议英文/国际化）
-        :param cause:   可选，底层触发的原始异常 Exception
+        :param message: Error description (preferably in English / i18n-friendly).
+        :param cause:   Optional underlying Exception that triggered this error.
         """
         super().__init__(message)
         self.cause = cause
@@ -45,37 +52,41 @@ class BaseAppException(Exception):
 
 class PdfExtractError(BaseAppException):
     """
-    PDF 文本解析与抽取业务异常。
+    Business exception for PDF text parsing and extraction.
 
-    用于封装 PDF 文件解析、内容提取、格式损坏等所有与 PDF 处理相关的业务错误，
-    仅由业务流程统一捕获，便于日志溯源与异常分析。
+    Used to wrap all PDF-related errors such as parsing failures, content
+    extraction issues, or corrupted file formats. This exception should be
+    caught at the business layer only, to support centralized logging and
+    error analysis.
     """
 
     def __init__(self, message: str, cause: Optional[Exception] = None):
         """
-        初始化 PdfExtractError。
+        Initialize PdfExtractError.
 
-        :param message: 错误描述信息（建议英文/国际化）
-        :param cause:   可选，底层触发的原始异常 Exception
+        :param message: Error description (preferably in English / i18n-friendly).
+        :param cause:   Optional underlying Exception that triggered this error.
         """
         super().__init__(message, cause)
 
 
 class DataValidationError(BaseAppException):
     """
-    参数与数据前置校验异常。
+    Exception for parameter and data pre-validation.
 
-    专用于参数、路径、类型、配置、数据有效性等前置校验环节的异常处理。
-    与业务性 PdfExtractError 明确解耦，用于输入校验保障。
+    Dedicated to errors in pre-validation steps, such as parameters, paths,
+    types, configuration, and data integrity/validity. This is explicitly
+    decoupled from business-level errors like PdfExtractError and focuses
+    on guarding inputs and configuration.
     """
 
     def __init__(self, message: str, cause: Optional[Exception] = None):
         """
-        初始化 DataValidationError。
+        Initialize DataValidationError.
 
-        :param message: 错误描述信息
-        :param cause:   可选，底层触发的原始异常 Exception
-        :raises TypeError: 若 message 不是 str
+        :param message: Error description.
+        :param cause:   Optional underlying Exception that triggered this error.
+        :raises TypeError: If message is not a str.
         """
         if not isinstance(message, str):
             raise TypeError("DataValidationError 'message' must be str")
@@ -84,18 +95,19 @@ class DataValidationError(BaseAppException):
 
 class BatchProcessingError(BaseAppException):
     """
-    批量处理流程顶级业务异常。
+    Top-level business exception for batch processing workflows.
 
-    统一封装批量处理流程中的所有非参数性业务错误，
-    适用于目录扫描、单个/多个文件处理、I/O 失败、业务流程异常等场景。
-    支持异常链，便于日志溯源和全局统一捕获。
+    Used to wrap all non-validation business errors in batch pipelines,
+    including directory scanning, single/multi-file processing, I/O failures,
+    and other workflow-related issues. Supports exception chaining to aid
+    logging, tracing, and global unified error handling.
     """
 
     def __init__(self, message: str, cause: Optional[Exception] = None):
         """
-        初始化 BatchProcessingError。
+        Initialize BatchProcessingError.
 
-        :param message: 错误描述信息
-        :param cause:   可选，底层触发的原始异常 Exception
+        :param message: Error description.
+        :param cause:   Optional underlying Exception that triggered this error.
         """
         super().__init__(message, cause)
