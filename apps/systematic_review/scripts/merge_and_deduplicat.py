@@ -1,13 +1,46 @@
+"""
+merge_and_deduplicat.py
+
+This module provides utilities for merging multiple Excel files containing
+search results from different databases, normalizing title case,
+deduplicating records based on 'Article Title' and 'Publication Year',
+rebuilding the 'No.' column, inspecting missing values, and writing the
+merged and deduplicated data back to disk.
+
+Typical workflow
+----------------
+1. Read raw Excel files from multiple databases (e.g. IEEE Xplore, ERIC,
+   Scopus, Web of Science).
+2. Normalize 'Article Title' and 'Publication Title' into a consistent
+   title-style capitalization.
+3. Normalize 'Publication Year' values to a four-digit 'YYYY' string.
+4. Filter out records with 'Publication Year' < 2017.
+5. Deduplicate records using ['Article Title', 'Publication Year'] as
+   composite keys.
+6. Rebuild the 'No.' column as a 1-based consecutive index.
+7. Optionally inspect missing values for each column.
+8. Save the merged and deduplicated dataset as a new Excel file.
+
+The main entry point is process_data(), which resolves paths, runs the
+pipeline, and saves the final file:
+    data/systematic_review/raw/merged_and_deduplicated_data.xlsx
+
+Author: SmartMahua <zhinengmahua@gmail.com>
+Date: 2025-05-22
+"""
+
 import pandas as pd
 from pathlib import Path
 
+
 class DataMerger:
     """
-    该类负责合并多个 Excel 文件，标准化标题格式，并根据 'Article Title' 和 'Publication Year' 去重。
-    同时，在去重后会重新编号 'No.' 列，并处理缺失值。
+    This class merges multiple Excel files, normalizes title case, and
+    deduplicates rows based on 'Article Title' and 'Publication Year'.
+    After deduplication, it rebuilds the 'No.' column and handles missing values.
     """
 
-    # 预定义列顺序（可按需要调整）
+    # Preferred column order (can be adjusted as needed).
     PREFERRED_COLUMN_ORDER = [
         "No.",
         "Authors",
@@ -21,189 +54,226 @@ class DataMerger:
         "Link",
     ]
 
-    def __init__(self, file_paths: list[Path], small_words_file: Path):
+    def __init__(self, file_paths: list[Path], small_words_file: Path) -> None:
         """
-        :param file_paths: 需要处理的 Excel 文件路径列表。
-        :param small_words_file: 包含小词（小写字母）列表的文本文件路径。
+        :param file_paths: List of Excel file paths to be merged.
+        :param small_words_file: Path to a text file containing "small words"
+                                 (e.g., conjunctions, prepositions) that should
+                                 remain lowercase in title case.
         """
         self.file_paths = file_paths
         self.small_words = self._load_small_words(small_words_file)
 
     def _load_small_words(self, small_words_file: Path) -> set:
         """
-        从 small_words.txt 文件中读取不需要大写的词（连词、介词等）。
-        :param small_words_file: small_words.txt 文件路径
-        :return: 小词的集合（不需要大写）
+        Load words from small_words.txt that should not be capitalized
+        in title case (e.g., conjunctions, prepositions).
+
+        :param small_words_file: Path to small_words.txt.
+        :return: A set of small words that should remain lowercase.
         """
         if not small_words_file.exists():
-            raise FileNotFoundError(f"小词文件 {small_words_file} 不存在！")
+            raise FileNotFoundError(f"Small-words file {small_words_file} does not exist!")
 
-        with open(small_words_file, 'r', encoding='utf-8') as f:
+        with open(small_words_file, "r", encoding="utf-8") as f:
             return set(line.strip().lower() for line in f)
 
     # -------------------- public API -------------------- #
 
     def merge_and_deduplicate(self) -> pd.DataFrame:
         """
-        合并所有 Excel 文件，并根据 'Article Title' 和 'Publication Year' 去重，重新生成 'No.' 列。
-        :return: 合并去重后的 DataFrame，并重新编号 'No.' 列
-        """
-        print("开始读取和处理文件...")
-        dfs = []
+        Merge all Excel files, deduplicate based on 'Article Title'
+        and 'Publication Year', and regenerate the 'No.' column.
 
-        # 统计每个数据库的数据量
-        file_data_counts = {}
+        :return: Deduplicated DataFrame with a rebuilt 'No.' column.
+        """
+        print("[INFO] Start reading and processing files...")
+        dfs: list[pd.DataFrame] = []
+
+        # Track row counts from each database/file.
+        file_data_counts: dict[str, int] = {}
 
         for file_path in self.file_paths:
             if Path(file_path).exists():
-                print(f"正在读取文件: {file_path}")
+                print(f"[INFO] Reading file: {file_path}")
                 df = self._read_and_process_file(file_path)
                 if not df.empty:
                     file_data_counts[file_path.name] = len(df)
                     dfs.append(df)
             else:
-                print(f"[WARN] 文件未找到，跳过: {file_path}")
+                print(f"[WARN] File not found, skipped: {file_path}")
 
         if not dfs:
-            raise ValueError("没有有效的文件数据，请检查路径是否正确。")
+            raise ValueError("No valid file data found. Please check the file paths.")
 
-        # 合并所有文件的数据
+        # Concatenate all DataFrames.
         merged_df = pd.concat(dfs, ignore_index=True)
-        print(f"成功合并 {len(dfs)} 个文件。")
-        print(f"合并后的总数据量: {len(merged_df)} 行数据。")
+        print(f"[INFO] Successfully merged {len(dfs)} files.")
+        print(f"[INFO] Total row count after merge: {len(merged_df)}")
 
-        # 打印每个数据库的数据量
+        # Print row count from each database/file.
         for file, count in file_data_counts.items():
-            print(f"数据库 '{file}' 数据量: {count} 行")
+            print(f"[INFO] File '{file}' row count: {count}")
 
-        # 过滤 "Publication Year" 小于 2017 年的数据
-        merged_df['Publication Year'] = pd.to_numeric(merged_df['Publication Year'], errors='coerce')
-        merged_df = merged_df[merged_df['Publication Year'] >= 2017]
-        print(f"过滤掉 'Publication Year' 小于 2017 年的数据后，共保留 {len(merged_df)} 行数据。")
+        # Filter out rows with 'Publication Year' < 2017.
+        merged_df["Publication Year"] = pd.to_numeric(
+            merged_df["Publication Year"], errors="coerce"
+        )
+        merged_df = merged_df[merged_df["Publication Year"] >= 2017]
+        print(
+            f"[INFO] After filtering 'Publication Year' < 2017, "
+            f"{len(merged_df)} rows remain."
+        )
 
-        # 打印合并后的列空值情况
+        # Print missing-value status before deduplication.
         self._print_missing_values(merged_df)
 
-        # 打印去重前数据量
-        print(f"去重前数据量: {len(merged_df)}")
+        # Print row count before deduplication.
+        print(f"[INFO] Row count before deduplication: {len(merged_df)}")
 
-        # 根据 'Article Title' 和 'Publication Year' 去重
-        print("正在去重数据...")
-        deduplicated_df = merged_df.drop_duplicates(subset=['Article Title', 'Publication Year'], keep='first')
+        # Deduplicate by 'Article Title' and 'Publication Year'.
+        print("[INFO] Deduplicating data...")
+        deduplicated_df = merged_df.drop_duplicates(
+            subset=["Article Title", "Publication Year"], keep="first"
+        )
 
-        # 打印去重后的数据量
-        print(f"去重后数据量: {len(deduplicated_df)}")
+        # Print row count after deduplication.
+        print(f"[INFO] Row count after deduplication: {len(deduplicated_df)}")
 
-        # 按 'Publication Year' 降序排序
-        print("正在按 'Publication Year' 降序排序数据...")
-        deduplicated_df = deduplicated_df.sort_values(by="Publication Year", ascending=False).reset_index(drop=True)
+        # Sort by 'Publication Year' in descending order.
+        print("[INFO] Sorting by 'Publication Year' in descending order...")
+        deduplicated_df = (
+            deduplicated_df.sort_values(by="Publication Year", ascending=False)
+            .reset_index(drop=True)
+        )
 
-        # 重新编号 'No.' 列
+        # Rebuild the 'No.' column.
         deduplicated_df = self._reindex_no_column(deduplicated_df)
 
-        # 打印去重后的列空值情况
-        print("去重后，开始统计空值情况...")
+        # Print missing-value status after deduplication.
+        print("[INFO] After deduplication, checking missing values...")
         self._print_missing_values(deduplicated_df)
 
-        # 填充缺失的值
-        print("正在填充缺失值...")
+        # Fill missing values.
+        print("[INFO] Filling missing values...")
         deduplicated_df = self._fill_missing_values(deduplicated_df, merged_df)
 
-        # 打印填充后的空值情况
-        print("填充后，空值情况统计：")
+        # Print missing-value status after filling.
+        print("[INFO] After filling, missing-value summary:")
         self._print_missing_values(deduplicated_df)
 
-        print(f"去重完成，共保留 {len(deduplicated_df)} 行数据。")
+        print(f"[INFO] Deduplication complete; {len(deduplicated_df)} rows retained.")
         return deduplicated_df
 
     def save_to_excel(self, df: pd.DataFrame, output_path: Path) -> None:
         """
-        将去重后的数据保存到 Excel 文件中。
-        :param df: 需要保存的 DataFrame
-        :param output_path: 输出的 Excel 文件路径
+        Save the deduplicated DataFrame to an Excel file.
+
+        :param df: DataFrame to be saved.
+        :param output_path: Output Excel file path.
         """
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        df.to_excel(output_path, index=False, engine='openpyxl')
-        print(f"[INFO] 数据成功保存到 {output_path}")
+        df.to_excel(output_path, index=False, engine="openpyxl")
+        print(f"[INFO] Data successfully saved to {output_path}")
 
     # -------------------- internal helpers -------------------- #
 
     def _read_and_process_file(self, file_path: Path) -> pd.DataFrame:
         """
-        读取 Excel 文件，并将 'Article Title' 和 'Publication Title' 中每个单词的首字母大写。
-        处理 'Publication Year' 格式为 'YYYY'。
-        :param file_path: 需要读取的 Excel 文件路径
-        :return: 返回处理后的 DataFrame
+        Read an Excel file and normalize:
+        - 'Article Title' and 'Publication Title' using title-style capitalization.
+        - 'Publication Year' to the 'YYYY' format.
+
+        :param file_path: Path to the Excel file to read.
+        :return: Processed DataFrame.
         """
         df = pd.read_excel(file_path)
 
-        # 如果 'Article Title' 列缺失，跳过该文件
-        if 'Article Title' not in df.columns:
-            print(f"[WARN] 'Article Title' 列缺失，跳过文件: {file_path.name}")
+        # If 'Article Title' is missing, skip this file.
+        if "Article Title" not in df.columns:
+            print(f"[WARN] Column 'Article Title' is missing; skipping file: {file_path.name}")
             return pd.DataFrame()
 
-        # 标准化标题格式
-        df['Article Title'] = df['Article Title'].apply(self._capitalize_words)
-        if 'Publication Title' in df.columns:
-            df['Publication Title'] = df['Publication Title'].apply(self._capitalize_words)
+        # Normalize title case for article and publication titles.
+        df["Article Title"] = df["Article Title"].apply(self._capitalize_words)
+        if "Publication Title" in df.columns:
+            df["Publication Title"] = df["Publication Title"].apply(self._capitalize_words)
 
-        # 处理 'Publication Year' 格式为 'YYYY'，如果存在日期格式
-        if 'Publication Year' in df.columns:
-            df['Publication Year'] = df['Publication Year'].apply(self._convert_to_year)
+        # Normalize 'Publication Year' to 'YYYY' if it appears as a date-like numeric.
+        if "Publication Year" in df.columns:
+            df["Publication Year"] = df["Publication Year"].apply(self._convert_to_year)
 
         return df
 
     def _capitalize_words(self, text: str) -> str:
         """
-        根据标题式大小写规则，将每个单词首字母大写，处理 NaN 或非字符串输入。
-        :param text: 需要格式化的字符串
-        :return: 格式化后的字符串，非字符串返回原始数据
+        Apply title-style capitalization to a string while respecting the
+        small-words list. Non-string inputs and NaN are handled gracefully.
+
+        :param text: Input string to format.
+        :return: Title-cased string; non-strings are returned unchanged, and
+                 NaN/None is returned as an empty string.
         """
         if isinstance(text, str):
             words = text.split()
             capitalized_words = []
 
             for i, word in enumerate(words):
-                # 句首或非小词才大写
+                # Capitalize the first word or any word not in the small-words list.
                 if i == 0 or word.lower() not in self.small_words:
                     capitalized_words.append(word.capitalize())
                 else:
                     capitalized_words.append(word.lower())
 
             return " ".join(capitalized_words)
-        return text if pd.notna(text) else ''  # 非字符串或空值，直接返回原始值
+
+        # For non-string or missing values, return as-is if not NaN, else empty string.
+        return text if pd.notna(text) else ""
 
     def _convert_to_year(self, year_value) -> str:
         """
-        将 'Publication Year' 列的值格式化为年份（'YYYY'），如果是 'YYYYMMDD' 格式。
-        :param year_value: 需要转换的值
-        :return: 格式化后的年份
+        Normalize 'Publication Year' values to a four-digit year ('YYYY').
+        If the value is given as 'YYYYMMDD', extract the first four digits.
+
+        :param year_value: Value to convert.
+        :return: Four-digit year string, or an empty string if the format
+                 cannot be recognized.
         """
         if isinstance(year_value, (int, float)):
             year_str = str(int(year_value))
-            if len(year_str) == 8:  # 'YYYYMMDD' 格式
+            if len(year_str) == 8:  # 'YYYYMMDD' format
                 return year_str[:4]
-            elif len(year_str) == 4:  # 已是 'YYYY' 格式
+            elif len(year_str) == 4:  # Already 'YYYY'
                 return year_str
-        return ''  # 如果无法识别格式，返回空值
+        return ""  # Return empty string if the format is not recognized.
 
-    def _fill_missing_values(self, deduplicated_df: pd.DataFrame, merged_df: pd.DataFrame) -> pd.DataFrame:
+    def _fill_missing_values(
+        self, deduplicated_df: pd.DataFrame, merged_df: pd.DataFrame
+    ) -> pd.DataFrame:
         """
-        填充缺失的值：根据 'Article Title' 和 'Publication Year' 判断相同标题和年份的行是否存在数据，若有则填充。
-        :param deduplicated_df: 去重后的 DataFrame
-        :param merged_df: 合并的原始 DataFrame
-        :return: 填充缺失值后的 DataFrame
+        Fill missing values in the deduplicated DataFrame by looking up
+        rows in the merged DataFrame that share the same 'Article Title'
+        and 'Publication Year'.
+
+        For each missing cell, if there exists a non-null value in any
+        matching row, the first such value is used for imputation.
+
+        :param deduplicated_df: DataFrame after deduplication.
+        :param merged_df: Original merged DataFrame before deduplication.
+        :return: DataFrame with missing values filled where possible.
         """
         for idx, row in deduplicated_df.iterrows():
             article_title = row["Article Title"]
             publication_year = row["Publication Year"]
-            # 查找合并数据中所有相同标题和年份的行
-            matching_rows = merged_df[(merged_df["Article Title"] == article_title) &
-                                      (merged_df["Publication Year"] == publication_year)]
+
+            # Find all rows in the merged data with the same title and year.
+            matching_rows = merged_df[
+                (merged_df["Article Title"] == article_title)
+                & (merged_df["Publication Year"] == publication_year)
+            ]
 
             for col in deduplicated_df.columns:
                 if pd.isna(row[col]) and col in matching_rows.columns:
-                    # 填充缺失值
                     non_null_values = matching_rows[col].dropna()
                     if not non_null_values.empty:
                         deduplicated_df.at[idx, col] = non_null_values.iloc[0]
@@ -212,20 +282,28 @@ class DataMerger:
 
     def _print_missing_values(self, df: pd.DataFrame) -> None:
         """
-        打印每列的空值数量，并显示每个空值所在的 'No.'（索引）行。
-        :param df: 要检查的 DataFrame
+        Print the number of missing values in each column, along with the
+        1-based row indices where missing values occur.
+
+        :param df: DataFrame to inspect.
         """
         missing_values = df.isnull().sum()
         for col, missing in missing_values.items():
             if missing > 0:
-                missing_indices = df[df[col].isnull()].index + 1  # 获取空值行的 'No.'（1-based）
-                print(f"{col}: {missing} 个空值，空值所在行: {list(missing_indices)}")
+                # Use index + 1 to align with human-readable row numbering.
+                missing_indices = df[df[col].isnull()].index + 1
+                print(
+                    f"[MISSING] {col}: {missing} missing values, "
+                    f"rows: {list(missing_indices)}"
+                )
 
     def _reindex_no_column(self, df: pd.DataFrame) -> pd.DataFrame:
         """
-        重新编号 'No.' 列，确保从 1 开始的连续编号。
-        :param df: 去重后的 DataFrame
-        :return: 重新编号后的 DataFrame
+        Rebuild the 'No.' column to ensure it provides a 1-based consecutive
+        index for all rows.
+
+        :param df: DataFrame after deduplication.
+        :return: DataFrame with a rebuilt 'No.' column.
         """
         df = df.copy()
         if "No." in df.columns:
@@ -236,9 +314,11 @@ class DataMerger:
 
     def _reorder_columns(self, df: pd.DataFrame) -> pd.DataFrame:
         """
-        按照预定义的列顺序调整 DataFrame 的列顺序。
-        :param df: 要调整的 DataFrame
-        :return: 调整列顺序后的 DataFrame
+        Reorder the DataFrame columns according to PREFERRED_COLUMN_ORDER,
+        appending any remaining columns afterward.
+
+        :param df: DataFrame whose columns should be reordered.
+        :return: DataFrame with columns reordered.
         """
         current_cols = list(df.columns)
         preferred_existing = [c for c in self.PREFERRED_COLUMN_ORDER if c in current_cols]
@@ -249,18 +329,23 @@ class DataMerger:
 
 def process_data() -> None:
     """
-    主函数，负责读取文件，合并数据，去重，并将结果保存到新的 Excel 文件中。
+    Top-level function that:
+    - Resolves the project root.
+    - Collects all raw Excel files from the 'raw' directory.
+    - Merges and deduplicates the data.
+    - Saves the result as 'merged_and_deduplicated_data.xlsx'.
     """
-    print("开始处理数据...")
+    print("[INFO] Starting data processing...")
 
     project_root = Path(__file__).resolve().parents[3]
     data_dir = project_root / "data/systematic_review" / "raw"
     file_names = ["ieee_xplore.xlsx", "eric.xlsx", "scopus.xlsx", "web_of_science.xlsx"]
     file_paths = [data_dir / name for name in file_names]
 
-    small_words_file = project_root / "data/systematic_review/small_words.txt"  # small_words.txt 文件路径
+    # Path to small_words.txt.
+    small_words_file = project_root / "data/systematic_review" / "small_words.txt"
 
-    # 创建 DataMerger 实例并处理数据
+    # Create a DataMerger instance and process data.
     merger = DataMerger(file_paths, small_words_file)
     merged_df = merger.merge_and_deduplicate()
 
