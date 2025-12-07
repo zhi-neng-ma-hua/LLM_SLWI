@@ -1,0 +1,317 @@
+
+================================================================================
+I. Raw search results and deduplication
+================================================================================
+
+[1.1 Record counts per database]
+
+- ERIC           :    198 records
+
+- IEEE Xplore    :     86 records
+
+- Scopus         :    697 records
+
+- Web of Science :    469 records
+
+- Total          :   1450 records
+
+
+[1.2 Record count after merge + deduplication]
+
+- merged_and_deduplicated_data.xlsx: 979 records
+
+
+
+
+================================================================================
+II. Stage 1 double-blind screening (title / abstract)
+================================================================================
+
+[2.1 Record count and decision distributions]
+
+- File name : R1_R2_R3_analysis_results.xlsx
+
+- Total rows: 979
+
+
+R1_Decision value distribution (JSON):
+
+{
+    "exclude": 817,
+    "include": 91,
+    "unsure": 71
+}
+
+
+R2_Decision value distribution (JSON):
+
+{
+    "exclude": 816,
+    "include": 93,
+    "unsure": 70
+}
+
+
+Need_R3 value distribution (JSON):
+
+{
+    "No": 902,
+    "Yes": 77
+}
+
+
+R3_Decision value distribution (JSON):
+
+{
+    "": 902,
+    "exclude": 59,
+    "include": 18
+}
+
+
+[2.2 R1/R2 agreement and R3 involvement]
+
+- R1/R2 agreement patterns (JSON):
+
+{
+    "R1_eq_R2_include": 90,
+    "R1_eq_R2_exclude": 812,
+    "R1_eq_R2_unsure": 64,
+    "R1_neq_R2": 13
+}
+
+
+[2.3 Final inclusion / exclusion at Stage 1 (based on R1/R2/R3_Decision)]
+
+Final inclusion at Stage 1 (by condition):
+
+  · Cond 1: R1 = R2 = 'include'                           → 90
+  
+  · Cond 2: R1 = R2 = 'unsure' & R3 = 'include'           → 15
+  
+  · Cond 3: R1 != R2         & R3 = 'include'             → 3
+  
+  ⇒ Total final include: 108
+
+
+Final exclusion at Stage 1 (by condition):
+
+  · Cond 1: R1 = R2 = 'exclude'                           → 812
+  
+  · Cond 2: R1 = R2 = 'unsure' & R3 = 'exclude'           → 49
+  
+  · Cond 3: R1 != R2         & R3 = 'exclude'             → 10
+  
+  ⇒ Total final exclude: 871
+
+
+
+
+================================================================================
+III. Stage 2 double-blind screening (full text)
+================================================================================
+
+[3.1 Record count and decision distributions]
+
+- File name : R1_R2_R3_analysis_results.xlsx
+
+- Total rows: 108
+
+
+R1_Decision value distribution (JSON):
+
+{
+    "include": 66,
+    "": 31,
+    "unsure": 8,
+    "exclude": 3
+}
+
+
+R2_Decision value distribution (JSON):
+
+{
+    "include": 68,
+    "": 31,
+    "unsure": 8,
+    "exclude": 1
+}
+
+
+R3_Decision value distribution (JSON):
+
+{
+    "": 98,
+    "include": 7,
+    "exclude": 3
+}
+
+
+[3.2 R1/R2 agreement, R3 involvement and Remark patterns]
+
+- R1/R2 agreement patterns (JSON):
+
+{
+    "R1_eq_R2_include": 66,
+    "R1_eq_R2_exclude": 1,
+    "R1_eq_R2_unsure": 7,
+    "R1_eq_R2_empty": 31,
+    "R1_neq_R2": 3
+}
+
+
+- Rows with R1_Decision and R2_Decision both empty, by Remark prefix:
+
+  · Remark starting with 'Access restrictions': 14
+  
+  · Remark starting with 'Duplicate with'     : 16
+  
+  · Remark starting with 'Retracted'          : 1
+
+
+[3.3 Final inclusion / exclusion at Stage 2 (based on R1/R2/R3_Decision)]
+
+Final inclusion at Stage 2 (by condition):
+
+  · Cond 1: R1 = R2 = 'include'                           → 66
+  
+  · Cond 2: R1 = R2 = 'unsure' & R3 = 'include'           → 5
+  
+  · Cond 3: R1 != R2         & R3 = 'include'             → 2
+  
+  ⇒ Total final include: 73
+
+
+Final exclusion at Stage 2 (by condition):
+
+  · Cond 1: R1 = R2 = 'exclude'                           → 1
+  
+  · Cond 2: R1 = R2 = 'unsure' & R3 = 'exclude'           → 2
+  
+  · Cond 3: R1 != R2         & R3 = 'exclude'             → 1
+  
+  · Cond 4: R1 = R2 = '' (not full-text screened, excluded) → 31
+  
+  ⇒ Total final exclude: 35
+
+
+
+
+================================================================================
+IV. Quality assessment (quality_assessment_table.xlsx)
+================================================================================
+
+[4.1 Item-level score distributions (q1–q10)]
+
+q1_research_aims_clarity_score value distribution (JSON):
+
+{
+    "2": 69,
+    "1": 4
+}
+
+
+q2_participant_info_score value distribution (JSON):
+
+{
+    "2": 53,
+    "1": 20
+}
+
+
+q3_sampling_and_power_score value distribution (JSON):
+
+{
+    "1": 62,
+    "2": 11
+}
+
+
+q4_group_allocation_and_bias_score value distribution (JSON):
+
+{
+    "1": 39,
+    "2": 31,
+    "0": 3
+}
+
+
+q5_longitudinal_design_score value distribution (JSON):
+
+{
+    "1": 48,
+    "2": 21,
+    "0": 4
+}
+
+
+q6_measurement_reliability_validity_score value distribution (JSON):
+
+{
+    "2": 38,
+    "1": 30,
+    "0": 5
+}
+
+
+q7_intervention_procedure_and_duration_score value distribution (JSON):
+
+{
+    "2": 65,
+    "1": 8
+}
+
+
+q8_statistical_method_appropriateness_score value distribution (JSON):
+
+{
+    "2": 62,
+    "1": 11
+}
+
+
+q9_assumption_and_effect_size_score value distribution (JSON):
+
+{
+    "1": 41,
+    "2": 29,
+    "0": 3
+}
+
+
+q10_outliers_and_interpretation_score value distribution (JSON):
+
+{
+    "1": 70,
+    "2": 2,
+    "0": 1
+}
+
+
+[4.2 total_quality_score distribution]
+
+total_quality_score value distribution (JSON):
+{
+    "16": 14,
+    "13": 11,
+    "14": 11,
+    "17": 10,
+    "18": 8,
+    "15": 7,
+    "12": 7,
+    "11": 3,
+    "19": 2
+}
+
+
+[4.3 quality_category distribution and High-quality studies]
+
+quality_category value distribution (JSON):
+
+{
+    "Moderate": 39,
+    "High": 34
+}
+
+
+Number of studies with quality_category = 'High' (included in final sample): 34
